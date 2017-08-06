@@ -22,8 +22,7 @@ public class RateReader {
     }
 
 
-
-    public RateData read(String filename) throws IOException {
+    public void read(String filename) throws IOException {
         InputStream fileStream = null;
         InputStream gzipStream = null;
         Reader in = null;
@@ -53,7 +52,5 @@ public class RateReader {
             IOUtils.closeQuietly(gzipStream);
             IOUtils.closeQuietly(fileStream);
         }
-
-        return null;
     }
 }
