@@ -8,10 +8,14 @@ import net.orpiske.mdp.plot.RateReader;
 import net.orpiske.mdp.utils.Constants;
 import org.apache.commons.cli.*;
 import org.apache.commons.io.FilenameUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 
 public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+
     private static CommandLine cmdLine;
 
     private static String fileName;
@@ -61,19 +65,18 @@ public class Main {
 
             rateReader.read(fileName);
 
-
             RateData rateData = rateDataProcessor.getRateData();
 
-//            // Plotter
+            // Plotter
             RatePlotter plotter = new RatePlotter(FilenameUtils.removeExtension(fileName));
-            System.out.println("Records to add: " + rateData.getRatePeriods().size());
+            logger.debug("Number of records to plot: {} ", rateData.getRatePeriods().size());
             for (Date d : rateData.getRatePeriods()) {
-                System.out.println("Date = : " + d);
+                logger.debug("Adding date record for plotting: {}", d);
             }
 
             plotter.plot(rateData.getRatePeriods(), rateData.getRateValues());
-//
-//            System.exit(0);
+
+            System.exit(0);
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println(e.getMessage());
