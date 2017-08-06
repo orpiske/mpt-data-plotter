@@ -6,11 +6,15 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.commons.csv.QuoteMode;
 import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.zip.GZIPInputStream;
 
 public class RateReader {
+    private static final Logger logger = LoggerFactory.getLogger(RateReader.class);
+
     private Processor processor;
 
     public RateReader(Processor processor) {
@@ -23,6 +27,8 @@ public class RateReader {
         InputStream fileStream = null;
         InputStream gzipStream = null;
         Reader in = null;
+
+        logger.debug("Reading file {}", filename);
 
         try {
             fileStream = new FileInputStream(filename);

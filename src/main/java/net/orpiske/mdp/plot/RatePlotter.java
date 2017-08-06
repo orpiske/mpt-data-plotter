@@ -57,7 +57,7 @@ public class RatePlotter {
 
         // Create Chart
         XYChart chart = buildCommonChart();
-        
+
         // Series
         XYSeries series = chart.addSeries(SERIES_NAME, xData, yData);
 

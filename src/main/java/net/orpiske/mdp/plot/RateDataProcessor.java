@@ -1,11 +1,15 @@
 package net.orpiske.mdp.plot;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 public class RateDataProcessor implements Processor {
+    private static final Logger logger = LoggerFactory.getLogger(RateDataProcessor.class);
+
     RateData rateData = new RateData();
 
     SimpleDateFormat formatter;
@@ -28,7 +32,8 @@ public class RateDataProcessor implements Processor {
                 rateData.getRatePeriods().add(ataDate);
                 rateData.getRateValues().add(count);
 
-//                System.out.println("Throughput for period " + ataDate + " = " + count);
+                logger.debug("Throughput for period {} = {}", ataDate, count);
+
                 count = 0;
                 last = ataDate;
             }
