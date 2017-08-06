@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class RatePlotter {
     private static final String SERIES_NAME = "Throughput rate";
     private String baseName;

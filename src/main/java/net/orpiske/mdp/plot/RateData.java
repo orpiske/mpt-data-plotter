@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RateData {
-    private List<Date> ratePeriods = new LinkedList<Date>();
-    private List<Integer> rateValues = new LinkedList<Integer>();
+    private List<Date> ratePeriods = new LinkedList<>();
+    private List<Integer> rateValues = new LinkedList<>();
 
     public List<Date> getRatePeriods() {
         return ratePeriods;

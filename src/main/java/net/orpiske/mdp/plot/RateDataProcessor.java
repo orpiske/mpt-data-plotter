@@ -7,6 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@SuppressWarnings("ALL")
 public class RateDataProcessor implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(RateDataProcessor.class);
 
