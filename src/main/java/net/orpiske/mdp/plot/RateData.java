@@ -12,15 +12,7 @@ public class RateData {
         return ratePeriods;
     }
 
-    public void setRatePeriods(List<Date> ratePeriods) {
-        this.ratePeriods = ratePeriods;
-    }
-
     public List<Integer> getRateValues() {
         return rateValues;
-    }
-
-    public void setRateValues(List<Integer> rateValues) {
-        this.rateValues = rateValues;
     }
 }
