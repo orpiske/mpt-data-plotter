@@ -10,11 +10,10 @@ import java.util.Date;
 public class RateDataProcessor implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(RateDataProcessor.class);
 
-    RateData rateData = new RateData();
-
-    SimpleDateFormat formatter;
-    Date last = new Date();
-    int count = 0;
+    private RateData rateData = new RateData();
+    private SimpleDateFormat formatter;
+    private Date last = new Date();
+    private int count = 0;
 
     public RateDataProcessor() {
         // 2017-08-05 10:38:23.934129
