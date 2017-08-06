@@ -67,8 +67,14 @@ public class Main {
 
             RateData rateData = rateDataProcessor.getRateData();
 
+
+            // Removes the gz
+            String baseName = FilenameUtils.removeExtension(fileName);
+            // Removes the csv
+            baseName = FilenameUtils.removeExtension(baseName);
+
             // Plotter
-            RatePlotter plotter = new RatePlotter(FilenameUtils.removeExtension(fileName));
+            RatePlotter plotter = new RatePlotter(baseName);
             logger.debug("Number of records to plot: {} ", rateData.getRatePeriods().size());
             for (Date d : rateData.getRatePeriods()) {
                 logger.debug("Adding date record for plotting: {}", d);
