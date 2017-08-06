@@ -49,12 +49,10 @@ public class RatePlotter {
         chart.getStyler().setDatePattern("yyyy-MM-dd HH:mm:ss");
 
         return chart;
-
     }
 
 
-    public void plotAll(java.util.List<Date> xData, java.util.List<Integer> yData) throws IOException {
-
+    private void plotAll(java.util.List<Date> xData, java.util.List<Integer> yData) throws IOException {
         // Create Chart
         XYChart chart = buildCommonChart();
 
@@ -67,7 +65,6 @@ public class RatePlotter {
         series.setLineStyle(SeriesLines.SOLID);
 
         BitmapEncoder.saveBitmap(chart, baseName + "_rate.png", BitmapEncoder.BitmapFormat.PNG);
-
     }
 
 
