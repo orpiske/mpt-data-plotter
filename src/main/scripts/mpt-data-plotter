@@ -47,4 +47,4 @@ fi
 
 mainclass=net.orpiske.mdp.main.Main
 
-java -classpath "$installdir"/bin/mdp-data-*.jar "$mainclass" $@
+java -classpath "$installdir"/bin/mpt-data-*.jar "$mainclass" $@

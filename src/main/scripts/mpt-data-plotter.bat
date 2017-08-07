@@ -20,6 +20,6 @@ set MDP_HOME=%~dp0\..
 if %OS%=="Windows_NT" @setlocal
 if %OS%=="WINNT" @setlocal
 
-for %%i in ("%MDP_HOME%"\bin\mdp-data-*) do set MDP_JAR="%%i"
+for %%i in ("%MDP_HOME%"\bin\mpt-data-*) do set MDP_JAR="%%i"
 
 @java -classpath %MDP_JAR% net.orpiske.mdp.main.Main %*
