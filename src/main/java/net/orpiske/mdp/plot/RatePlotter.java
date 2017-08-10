@@ -35,6 +35,10 @@ public class RatePlotter {
     private static final String SERIES_NAME = "Throughput rate";
     private String baseName;
 
+    private int outputWidth = 1200;
+    private int outputHeight = 700;
+    private boolean plotGridLinesVisible = true;
+
     public RatePlotter(final String baseName) {
         this.baseName = baseName;
     }
@@ -43,8 +47,8 @@ public class RatePlotter {
 
         // Create Chart
         XYChart chart = new XYChartBuilder()
-                .width(1200)
-                .height(700)
+                .width(outputWidth)
+                .height(outputHeight)
                 .title("Throughput rate")
                 .xAxisTitle("Time")
                 .yAxisTitle("Rate")
@@ -54,7 +58,7 @@ public class RatePlotter {
         chart.getStyler().setChartBackgroundColor(Color.WHITE);
         chart.getStyler().setChartTitleBoxBackgroundColor(new Color(0, 222, 0));
 
-        chart.getStyler().setPlotGridLinesVisible(true);
+        chart.getStyler().setPlotGridLinesVisible(plotGridLinesVisible);
 
         chart.getStyler().setYAxisTickMarkSpacingHint(15);
 
@@ -87,5 +91,17 @@ public class RatePlotter {
 
     public void plot(java.util.List<Date> xData, List<Integer> yData) throws IOException {
         plotAll(xData, yData);
+    }
+
+    public void setOutputWidth(int outputWidth) {
+        this.outputWidth = outputWidth;
+    }
+
+    public void setOutputHeight(int outputHeight) {
+        this.outputHeight = outputHeight;
+    }
+
+    public void setPlotGridLinesVisible(boolean plotGridLinesVisible) {
+        this.plotGridLinesVisible = plotGridLinesVisible;
     }
 }
