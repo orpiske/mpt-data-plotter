@@ -16,6 +16,7 @@
 
 package net.orpiske.mdp.plot;
 
+import net.orpiske.mdp.plot.exceptions.MptEmptyDataSet;
 import org.knowm.xchart.BitmapEncoder;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
@@ -89,7 +90,15 @@ public class RatePlotter {
     }
 
 
-    public void plot(java.util.List<Date> xData, List<Integer> yData) throws IOException {
+    public void plot(java.util.List<Date> xData, List<Integer> yData) throws IOException, MptEmptyDataSet {
+        if (xData == null || xData.size() == 0) {
+            throw new MptEmptyDataSet("The 'X' column data set is empty");
+        }
+
+        if (yData == null || yData.size() == 0) {
+            throw new MptEmptyDataSet("The 'Y' column data set is empty");
+        }
+
         plotAll(xData, yData);
     }
 
