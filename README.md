@@ -70,3 +70,7 @@ If you maintain your own Maven repository, you can deploy this library using:
 ```
 mvn deploy -DaltDeploymentRepository=libs-snapshot::default::http://hostname:8081/path/to/libs-snapshot-local
 ```
+
+Samples
+----
+![Rate](doc/senderd-rate_rate.png)
