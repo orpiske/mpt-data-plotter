@@ -59,6 +59,8 @@ public class RatePlotter {
         chart.getStyler().setChartBackgroundColor(Color.WHITE);
         chart.getStyler().setChartTitleBoxBackgroundColor(new Color(0, 222, 0));
 
+        Font font = new Font("Verdana", Font.PLAIN, 12);
+        chart.getStyler().setBaseFont(font);
         chart.getStyler().setPlotGridLinesVisible(plotGridLinesVisible);
 
         chart.getStyler().setYAxisTickMarkSpacingHint(15);
@@ -69,6 +71,11 @@ public class RatePlotter {
         chart.getStyler().setPlotMargin(0);
         chart.getStyler().setPlotContentSize(.95);
         chart.getStyler().setDatePattern("yyyy-MM-dd HH:mm:ss");
+
+        chart.getStyler().setChartTitleFont(new Font("Verdana", Font.BOLD, 14));
+        chart.getStyler().setLegendFont(new Font("Verdana", Font.PLAIN, 12));
+        chart.getStyler().setAxisTitleFont(new Font("Verdana", Font.PLAIN, 12));
+        chart.getStyler().setAxisTickLabelsFont(new Font("Verdana", Font.PLAIN, 10));
 
         return chart;
     }
