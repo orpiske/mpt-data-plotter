@@ -15,19 +15,17 @@
   ~  limitations under the License.
   -->
 
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.orpiske</groupId>
     <artifactId>mpt-data-plotter</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
 
     <scm>
         <developerConnection>scm:git:git@github.com:orpiske/mpt-data-plotter.git</developerConnection>
         <url>https://github.com/orpiske/mpt-data-plotter</url>
-        <tag>HEAD</tag>
+        <tag>mpt-data-plotter-1.0.2</tag>
     </scm>
 
     <licenses>
