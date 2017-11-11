@@ -17,7 +17,6 @@ package net.orpiske.mdp.utils;
 
 /**
  * Application constants
- * @author Otavio R. Piske <angusyoung@gmail.com>
  *
  */
 public final class Constants {
