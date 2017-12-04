@@ -45,8 +45,7 @@ public class RateDataProcessor implements Processor {
                 count++;
             }
             else {
-                rateData.getRatePeriods().add(ataDate);
-                rateData.getRateValues().add(count);
+                rateData.add(count, ataDate);
 
                 logger.debug("Throughput for period {} = {}", ataDate, count);
 
