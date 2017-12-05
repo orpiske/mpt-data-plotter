@@ -27,7 +27,7 @@ import java.util.Date;
 public class RateDataProcessor implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(RateDataProcessor.class);
 
-    private RateData rateData = new RateData();
+    private RateData<java.lang.Integer> rateData = new RateData<>();
     private SimpleDateFormat formatter;
     private Date last = new Date();
     private int count = 0;
@@ -58,7 +58,7 @@ public class RateDataProcessor implements Processor {
         }
     }
 
-    public RateData getRateData() {
+    public RateData<java.lang.Integer> getRateData() {
         return rateData;
     }
 }

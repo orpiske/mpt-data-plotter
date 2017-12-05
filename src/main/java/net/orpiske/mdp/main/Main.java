@@ -81,7 +81,7 @@ public class Main {
 
             rateReader.read(fileName);
 
-            RateData rateData = rateDataProcessor.getRateData();
+            RateData<Integer> rateData = rateDataProcessor.getRateData();
 
 
             // Removes the gz

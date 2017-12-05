@@ -81,7 +81,7 @@ public class RatePlotter {
     }
 
 
-    private void plotAll(java.util.List<Date> xData, java.util.List<Integer> yData) throws IOException {
+    private void plotAll(java.util.List<Date> xData, java.util.List<? extends Number> yData) throws IOException {
         // Create Chart
         XYChart chart = buildCommonChart();
 
@@ -97,7 +97,7 @@ public class RatePlotter {
     }
 
 
-    public void plot(java.util.List<Date> xData, List<Integer> yData) throws IOException, MptEmptyDataSet {
+    public void plot(java.util.List<Date> xData, List<? extends Number> yData) throws IOException, MptEmptyDataSet {
         if (xData == null || xData.size() == 0) {
             throw new MptEmptyDataSet("The 'X' column data set is empty");
         }

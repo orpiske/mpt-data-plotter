@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SimpleTest {
-    public RateData load(final String fileName) throws IOException {
+    public RateData<Integer> load(final String fileName) throws IOException {
         RateDataProcessor rateDataProcessor = new RateDataProcessor();
         RateReader rateReader = new RateReader(rateDataProcessor);
 
@@ -20,7 +20,7 @@ public class SimpleTest {
         return rateDataProcessor.getRateData();
     }
 
-    public void plot(final String fileName, final RateData rateData) throws IOException, MptEmptyDataSet {
+    public void plot(final String fileName, final RateData<? extends Number> rateData) throws IOException, MptEmptyDataSet {
         // Removes the gz
         String baseName = FilenameUtils.removeExtension(fileName);
 
@@ -36,7 +36,7 @@ public class SimpleTest {
     public void testPlotReceiverRate() throws Exception {
         String fileName = this.getClass().getResource("receiverd-rate-01.csv.gz").getPath();
 
-        RateData rateData = load(fileName);
+        RateData<Integer> rateData = load(fileName);
 
         assertTrue("Incorrect loaded size for the receiver rate periods", 11 == rateData.getRatePeriods().size());
         assertTrue("Incorrect loaded size for the receiver rate values", 11 == rateData.getRateValues().size());
@@ -53,7 +53,7 @@ public class SimpleTest {
     public void testPlotSenderRate() throws Exception {
         String fileName = this.getClass().getResource("senderd-rate-01.csv.gz").getPath();
 
-        RateData rateData = load(fileName);
+        RateData<Integer> rateData = load(fileName);
 
         assertTrue("Incorrect loaded size for the rate periods", 8 == rateData.getRatePeriods().size());
         assertTrue("Incorrect loaded size for the rate values", 8 == rateData.getRateValues().size());
@@ -71,7 +71,7 @@ public class SimpleTest {
     public void testPlotOutOrderRate() throws Exception {
         String fileName = this.getClass().getResource("out-of-order-01.csv.gz").getPath();
 
-        RateData rateData = load(fileName);
+        RateData<Integer> rateData = load(fileName);
 
         assertTrue("Incorrect loaded size for the rate periods", 6 == rateData.getRatePeriods().size());
         assertTrue("Incorrect loaded size for the rate values", 6 == rateData.getRateValues().size());

@@ -19,12 +19,12 @@ package net.orpiske.mdp.plot;
 import java.time.Instant;
 import java.util.*;
 
-public class RateData {
-    private static class RateInfo implements Comparable<RateInfo> {
+public class RateData<T extends Number> {
+    private static class RateInfo<T extends Number> implements Comparable<RateInfo<T>> {
         private Date period;
-        private int count;
+        private T count;
 
-        public RateInfo(Date period, int count) {
+        public RateInfo(Date period, T count) {
             this.period = period;
             this.count = count;
         }
@@ -33,12 +33,12 @@ public class RateData {
             return period;
         }
 
-        public int getCount() {
+        public T getCount() {
             return count;
         }
 
         @Override
-        public int compareTo(RateInfo rateInfo) {
+        public int compareTo(RateInfo<T> rateInfo) {
 
             Instant current = this.getPeriod().toInstant();
             Instant other = rateInfo.getPeriod().toInstant();
@@ -60,7 +60,7 @@ public class RateData {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
-            RateInfo rateInfo = (RateInfo) o;
+            RateInfo<T> rateInfo = (RateInfo<T>) o;
 
             return period.equals(rateInfo.period);
         }
@@ -73,15 +73,12 @@ public class RateData {
 
     private Set<RateInfo> rateInfos = new TreeSet<>();
 
-    public void add(Integer count, Date period) {
-        RateInfo ri = new RateInfo(period, count);
+    public void add(T count, Date period) {
+        RateInfo<T> ri = new RateInfo<T>(period, count);
 
         rateInfos.add(ri);
     }
 
-    private void add(List<?> ret) {
-
-    }
 
     public List<Date> getRatePeriods() {
         List<Date> list = new LinkedList<>();
@@ -90,8 +87,9 @@ public class RateData {
         return list;
     }
 
-    public List<Integer> getRateValues() {
-        List<Integer> list = new LinkedList<>();
+    public List<Number> getRateValues() {
+        List<Number> list = new LinkedList<>();
+
         rateInfos.stream().forEach(item->list.add(item.getCount()));
 
         return list;
