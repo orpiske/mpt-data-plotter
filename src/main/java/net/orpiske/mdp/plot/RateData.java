@@ -19,69 +19,14 @@ package net.orpiske.mdp.plot;
 
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
-
-import java.time.Instant;
 import java.util.*;
 
 public class RateData<T extends Number> {
-    private static class RateInfo<T extends Number> implements Comparable<RateInfo<T>> {
-        private Date period;
-        private T count;
-
-        public RateInfo(Date period, T count) {
-            this.period = period;
-            this.count = count;
-        }
-
-        public Date getPeriod() {
-            return period;
-        }
-
-        public T getCount() {
-            return count;
-        }
-
-        @Override
-        public int compareTo(RateInfo<T> rateInfo) {
-
-            Instant current = this.getPeriod().toInstant();
-            Instant other = rateInfo.getPeriod().toInstant();
-
-            if (current.isBefore(other)) {
-                return -1;
-            }
-            else {
-                if (current.isAfter(other)) {
-                    return 1;
-                }
-            }
-
-            return 0;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            RateInfo<T> rateInfo = (RateInfo<T>) o;
-
-            return period.equals(rateInfo.period);
-        }
-
-        @Override
-        public int hashCode() {
-            return period.hashCode();
-        }
-    };
-
-    private Set<RateInfo> rateInfos = new TreeSet<>();
+    private Set<RateInfo<T>> rateInfos = new TreeSet<>();
     private SummaryStatistics statistics;
 
-    public void add(T count, Date period) {
-        RateInfo<T> ri = new RateInfo<T>(period, count);
-
-        rateInfos.add(ri);
+    public void add(RateInfo<T> rateInfo) {
+        rateInfos.add(rateInfo);
     }
 
 
@@ -113,6 +58,7 @@ public class RateData<T extends Number> {
             }
         }
     }
+
 
     public double getGeometricMean() {
         prepareStatistics();

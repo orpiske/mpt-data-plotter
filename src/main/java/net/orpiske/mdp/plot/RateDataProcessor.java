@@ -22,15 +22,15 @@ import org.slf4j.LoggerFactory;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-@SuppressWarnings("ALL")
 public class RateDataProcessor implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(RateDataProcessor.class);
 
-    private RateData<java.lang.Integer> rateData = new RateData<>();
+    private Map<String, RateInfo<Integer>> cache = new HashMap<>();
     private SimpleDateFormat formatter;
-    private Date last = new Date();
-    private int count = 0;
+
 
     public RateDataProcessor() {
         // 2017-08-05 10:38:23.934129
@@ -38,27 +38,34 @@ public class RateDataProcessor implements Processor {
     }
 
     public void process(final String eta, final String ata) {
+        final int indexLen = 19;
+
         try {
-            Date ataDate = formatter.parse(ata);
+            String period = ata.substring(0, indexLen);
+            RateInfo<Integer> rateInfo = cache.get(period);
 
-            if (ataDate.equals(last)) {
-                count++;
+            if (rateInfo == null) {
+                Date ataDate = formatter.parse(ata);
+
+                rateInfo = new RateInfo<>(ataDate, 1);
+                cache.put(period, rateInfo);
+            } else {
+                Integer i = rateInfo.getCount();
+
+                i++;
+                rateInfo.setCount(i);
             }
-            else {
-                rateData.add(count, ataDate);
-
-                logger.debug("Throughput for period {} = {}", ataDate, count);
-
-                count = 0;
-                last = ataDate;
-            }
-
         } catch (ParseException e) {
             e.printStackTrace();
         }
     }
 
-    public RateData<java.lang.Integer> getRateData() {
+    public RateData<Integer> getRateData() {
+        RateData<Integer> rateData = new RateData<>();
+
+        for (RateInfo<Integer> rateInfo : cache.values()) {
+            rateData.add(rateInfo);
+        }
         return rateData;
     }
 }
