@@ -3,6 +3,10 @@ package net.orpiske.mdp.plot;
 import java.time.Instant;
 import java.util.Date;
 
+/**
+ * Rate information for a given period of time
+ * @param <T>
+ */
 class RateInfo<T extends Number> implements Comparable<RateInfo<T>> {
     private Date period;
     private T count;

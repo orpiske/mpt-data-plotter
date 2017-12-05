@@ -21,6 +21,10 @@ import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.*;
 
+/**
+ * A container for the collected rate information
+ * @param <T>
+ */
 public class RateData<T extends Number> {
     private Set<RateInfo<T>> rateInfos = new TreeSet<>();
     private SummaryStatistics statistics;

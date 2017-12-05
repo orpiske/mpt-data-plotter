@@ -16,7 +16,9 @@
 
 package net.orpiske.mdp.plot;
 
+/**
+ * A interface for processing rate data
+ */
 public interface Processor {
-    @SuppressWarnings("unused")
     void process(final String eta, final String ata);
 }

@@ -28,6 +28,9 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.util.zip.GZIPInputStream;
 
+/**
+ * A reader for the rate information
+ */
 public class RateReader {
     private static final Logger logger = LoggerFactory.getLogger(RateReader.class);
 
