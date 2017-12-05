@@ -17,17 +17,17 @@
 package net.orpiske.mdp.main;
 
 
-import net.orpiske.mdp.plot.RateData;
-import net.orpiske.mdp.plot.RateDataProcessor;
-import net.orpiske.mdp.plot.RatePlotter;
-import net.orpiske.mdp.plot.RateReader;
+import net.orpiske.mdp.plot.*;
 import net.orpiske.mdp.utils.Constants;
 import org.apache.commons.cli.*;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.util.Date;
+import java.lang.Integer;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
@@ -97,6 +97,9 @@ public class Main {
             }
 
             plotter.plot(rateData.getRatePeriods(), rateData.getRateValues());
+
+            File input = new File(fileName);
+            RatePropertyWriter.write(rateData, input.getParentFile());
 
             System.exit(0);
         } catch (Exception e) {

@@ -16,6 +16,10 @@
 
 package net.orpiske.mdp.plot;
 
+
+import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
+
+
 import java.time.Instant;
 import java.util.*;
 
@@ -72,6 +76,7 @@ public class RateData<T extends Number> {
     };
 
     private Set<RateInfo> rateInfos = new TreeSet<>();
+    private SummaryStatistics statistics;
 
     public void add(T count, Date period) {
         RateInfo<T> ri = new RateInfo<T>(period, count);
@@ -93,5 +98,47 @@ public class RateData<T extends Number> {
         rateInfos.stream().forEach(item->list.add(item.getCount()));
 
         return list;
+    }
+
+    private void prepareStatistics() {
+        if (statistics == null) {
+            List<Number> rateValues = getRateValues();
+
+            // Use Summary Statistics because the data set might be too large
+            // and we don't want to abuse memory usage
+            statistics = new SummaryStatistics();
+
+            for (Number n : rateValues) {
+                statistics.addValue(n.doubleValue());
+            }
+        }
+    }
+
+    public double getGeometricMean() {
+        prepareStatistics();
+
+        return statistics.getGeometricMean();
+    }
+
+    public double getMax() {
+        prepareStatistics();
+
+        return statistics.getMax();
+    }
+
+    public double getMin() {
+        prepareStatistics();
+
+        return statistics.getMin();
+    }
+
+    public double getStandardDeviation() {
+        prepareStatistics();
+
+        return statistics.getStandardDeviation();
+    }
+
+    public int getNumberOfSamples() {
+        return rateInfos.size();
     }
 }

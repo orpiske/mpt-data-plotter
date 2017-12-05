@@ -64,6 +64,12 @@ public class SimpleTest {
 
         File outputFile = new File(ratePngFilename);
         assertTrue("Missing output file: " + outputFile, outputFile.exists());
+
+        File input = new File(fileName);
+        RatePropertyWriter.write(rateData, input.getParentFile());
+
+        File propertiesFile = new File(input.getParentFile(), "rate.properties");
+        assertTrue("Missing properties output file: " + propertiesFile, propertiesFile.exists());
     }
 
 
@@ -87,11 +93,10 @@ public class SimpleTest {
             }
         }
 
-
-
         String ratePngFilename = FilenameUtils.removeExtension(FilenameUtils.removeExtension(fileName)) + "_rate.png";
 
         File outputFile = new File(ratePngFilename);
         assertTrue("Missing output file: " + outputFile, outputFile.exists());
     }
+
 }
