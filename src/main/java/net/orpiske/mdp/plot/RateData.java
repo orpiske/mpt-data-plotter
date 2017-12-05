@@ -79,10 +79,6 @@ public class RateData {
         rateInfos.add(ri);
     }
 
-    private void add(List<?> ret) {
-
-    }
-
     public List<Date> getRatePeriods() {
         List<Date> list = new LinkedList<>();
         rateInfos.stream().forEach(item->list.add(item.getPeriod()));
