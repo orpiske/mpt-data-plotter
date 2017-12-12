@@ -57,7 +57,7 @@ public class RateReader {
             Iterable<CSVRecord> records = CSVFormat.RFC4180
                     .withCommentMarker('#')
                     .withFirstRecordAsHeader()
-                    .withRecordSeparator(';')
+                    .withRecordSeparator(',')
                     .withQuote('"')
                     .withQuoteMode(QuoteMode.NON_NUMERIC)
                     .parse(in);
