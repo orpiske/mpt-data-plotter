@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.util.Date;
 import java.lang.Integer;
+import java.util.List;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
@@ -91,12 +92,17 @@ public class Main {
 
             // Plotter
             RatePlotter plotter = new RatePlotter(baseName);
-            logger.debug("Number of records to plot: {} ", rateData.getRatePeriods().size());
-            for (Date d : rateData.getRatePeriods()) {
-                logger.debug("Adding date record for plotting: {}", d);
+
+            List<Date> ratePeriods = rateData.getRatePeriods();
+            logger.info("Number of rate records to plot: {} ", ratePeriods.size());
+
+            if (logger.isDebugEnabled()) {
+                for (Date d : ratePeriods) {
+                    logger.debug("Adding date record for plotting: {}", d);
+                }
             }
 
-            plotter.plot(rateData.getRatePeriods(), rateData.getRateValues());
+            plotter.plot(ratePeriods, rateData.getRateValues());
 
             File input = new File(fileName);
             RatePropertyWriter.write(rateData, input.getParentFile());
