@@ -36,6 +36,7 @@ public class Main {
     private static CommandLine cmdLine;
 
     private static String fileName;
+    private static boolean fast;
 
     private static void configureCommon(Properties properties) {
         properties.setProperty("log4j.appender.stdout",
@@ -139,6 +140,7 @@ public class Main {
         options.addOption("h", "help", false, "prints the help");
         options.addOption("f", "file", true, "file to plot");
         options.addOption("l", "log-level", true, "optional log-level (one of trace, debug, info, silent [ default] )");
+        options.addOption("F", "fast", false, "whether to use the fast reader or the default one)");
 
         try {
             cmdLine = parser.parse(options, args);
@@ -178,8 +180,9 @@ public class Main {
                 silent();
                 break;
             }
-
         }
+
+        fast = cmdLine.hasOption('F');
     }
 
     public static void main(String[] args) {
@@ -187,7 +190,14 @@ public class Main {
 
         try {
             RateDataProcessor rateDataProcessor = new RateDataProcessor();
-            RateReader rateReader = new DefaultRateReader(rateDataProcessor);
+            RateReader rateReader;
+
+            if (fast) {
+                rateReader = new FastRateReader(rateDataProcessor);
+            }
+            else {
+                rateReader = new DefaultRateReader(rateDataProcessor);
+            }
 
             rateReader.read(fileName);
 
