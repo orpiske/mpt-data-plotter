@@ -28,7 +28,7 @@ import java.util.Map;
 public class RateDataProcessor implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(RateDataProcessor.class);
 
-    private Map<String, RateInfo<Integer>> cache = new HashMap<>();
+    private Map<String, RateInfo> cache = new HashMap<>();
     private SimpleDateFormat formatter;
     private long errorCount = 0;
 
@@ -38,22 +38,24 @@ public class RateDataProcessor implements Processor {
         formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     }
 
+    @Override
     public void process(final String eta, final String ata) {
         final int indexLen = 19;
 
         try {
             String period = ata.substring(0, indexLen);
-            RateInfo<Integer> rateInfo = cache.get(period);
+            RateInfo rateInfo = cache.get(period);
 
             if (rateInfo == null) {
                 Date ataDate = formatter.parse(ata);
 
-                rateInfo = new RateInfo<>(ataDate, 1);
+                rateInfo = new RateInfo(ataDate, 1);
                 cache.put(period, rateInfo);
             } else {
-                Integer i = rateInfo.getCount();
+                int i = rateInfo.getCount();
 
                 i++;
+                assert i>=0;
                 rateInfo.setCount(i);
             }
         } catch (ParseException e) {
@@ -62,12 +64,12 @@ public class RateDataProcessor implements Processor {
         }
     }
 
-    public RateData<Integer> getRateData() {
-        RateData<Integer> rateData = new RateData<>();
+    public RateData getRateData() {
+        RateData rateData = new RateData();
 
-        for (RateInfo<Integer> rateInfo : cache.values()) {
+        cache.forEach((ratePeriod,rateInfo)->{
             rateData.add(rateInfo);
-        }
+        });
 
         rateData.setErrorCount(errorCount);
         return rateData;

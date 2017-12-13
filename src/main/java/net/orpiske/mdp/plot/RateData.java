@@ -20,77 +20,85 @@ package net.orpiske.mdp.plot;
 import org.apache.commons.math3.stat.descriptive.SummaryStatistics;
 
 import java.util.*;
+import java.util.function.IntConsumer;
+import java.util.function.LongConsumer;
+import java.util.stream.Collectors;
 
 /**
  * A container for the collected rate information
- * @param <T>
  */
-public class RateData<T extends Number> {
-    private Set<RateInfo<T>> rateInfos = new TreeSet<>();
+public class RateData
+{
+    private Set<RateInfo> rateInfos = new TreeSet<>();
     private SummaryStatistics statistics;
     private long errorCount;
     private long skipCount = 0;
 
-    public void add(RateInfo<T> rateInfo) {
+    public void add(RateInfo rateInfo)
+    {
         rateInfos.add(rateInfo);
     }
 
 
-    public List<Date> getRatePeriods() {
-        List<Date> list = new LinkedList<>();
-        rateInfos.stream().forEach(item->list.add(item.getPeriod()));
-
+    public List<Date> getRatePeriods()
+    {
+        final List<Date> list = new ArrayList<>(rateInfos.size());
+        rateInfos.forEach(item -> list.add(item.getPeriod()));
         return list;
     }
 
-    public List<Number> getRateValues() {
-        List<Number> list = new LinkedList<>();
-
-        rateInfos.stream().forEach(item->list.add(item.getCount()));
-
-        return list;
+    public List<Integer> getRateValues()
+    {
+        return rateInfos.stream().mapToInt(RateInfo::getCount).boxed().collect(Collectors.toList());
     }
 
-    private void prepareStatistics() {
-        if (statistics == null) {
-            List<Number> rateValues = getRateValues();
+    private void processRateValues(IntConsumer rateValue)
+    {
+        rateInfos.stream().mapToInt(RateInfo::getCount).forEach(rateValue);
+    }
 
+    private void prepareStatistics()
+    {
+        if (statistics == null)
+        {
             // Use Summary Statistics because the data set might be too large
             // and we don't want to abuse memory usage
             statistics = new SummaryStatistics();
-
-            for (Number n : rateValues) {
-                statistics.addValue(n.doubleValue());
-            }
+            processRateValues(statistics::addValue);
         }
     }
 
 
-    public double getGeometricMean() {
+    public double getGeometricMean()
+    {
         prepareStatistics();
 
         return statistics.getGeometricMean();
     }
 
-    public double getMax() {
+    public double getMax()
+    {
         prepareStatistics();
 
         return statistics.getMax();
     }
 
-    public double getMin() {
+    public double getMin()
+    {
         prepareStatistics();
 
         return statistics.getMin();
     }
 
-    public double getStandardDeviation() {
+    public double getStandardDeviation()
+    {
         prepareStatistics();
 
         return statistics.getStandardDeviation();
     }
 
-    public int getNumberOfSamples() {
+    public int getNumberOfSamples()
+    {
         return rateInfos.size();
     }
 

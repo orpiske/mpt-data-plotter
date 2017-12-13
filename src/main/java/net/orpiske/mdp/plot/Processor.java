@@ -19,6 +19,13 @@ package net.orpiske.mdp.plot;
 /**
  * A interface for processing rate data
  */
+@FunctionalInterface
 public interface Processor {
+
+    /**
+     * Process a CSV record
+     * @param eta
+     * @param ata
+     */
     void process(final String eta, final String ata);
 }

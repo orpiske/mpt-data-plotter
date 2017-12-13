@@ -27,7 +27,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.Date;
-import java.lang.Integer;
 import java.util.List;
 import java.util.Properties;
 
@@ -188,12 +187,12 @@ public class Main {
 
         try {
             RateDataProcessor rateDataProcessor = new RateDataProcessor();
-            DefaultRateReader rateReader = new DefaultRateReader(rateDataProcessor);
+            RateReader rateReader = new DefaultRateReader(rateDataProcessor);
 
             rateReader.read(fileName);
 
             logger.info("Reading the rate records file");
-            RateData<Integer> rateData = rateDataProcessor.getRateData();
+            RateData rateData = rateDataProcessor.getRateData();
 
             // Removes the gz
             String baseName = FilenameUtils.removeExtension(fileName);
