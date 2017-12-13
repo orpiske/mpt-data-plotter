@@ -29,6 +29,7 @@ public class RateData<T extends Number> {
     private Set<RateInfo<T>> rateInfos = new TreeSet<>();
     private SummaryStatistics statistics;
     private long errorCount;
+    private long skipCount = 0;
 
     public void add(RateInfo<T> rateInfo) {
         rateInfos.add(rateInfo);
@@ -99,5 +100,13 @@ public class RateData<T extends Number> {
 
     public void setErrorCount(long errorCount) {
         this.errorCount = errorCount;
+    }
+
+    public long getSkipCount() {
+        return skipCount;
+    }
+
+    public void setSkipCount(long skipCount) {
+        this.skipCount = skipCount;
     }
 }

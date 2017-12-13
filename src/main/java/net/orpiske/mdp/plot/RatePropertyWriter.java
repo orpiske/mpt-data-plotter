@@ -33,6 +33,7 @@ public class RatePropertyWriter {
         prop.setProperty("rateStandardDeviation", Double.toString(rateData.getStandardDeviation()));
         prop.setProperty("rateSamples", Double.toString(rateData.getNumberOfSamples()));
         prop.setProperty("rateErrorCount", Long.toString(rateData.getErrorCount()));
+        prop.setProperty("rateSkipCount", Long.toString(rateData.getSkipCount()));
 
         try (FileOutputStream fos = new FileOutputStream(new File(directory, "rate.properties"))) {
             prop.store(fos, "mpt-data-plotter");
