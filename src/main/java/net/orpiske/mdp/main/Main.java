@@ -20,8 +20,8 @@ package net.orpiske.mdp.main;
 import net.orpiske.mdp.plot.*;
 import net.orpiske.mdp.utils.Constants;
 import org.apache.commons.cli.*;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.log4j.PropertyConfigurator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +29,7 @@ import java.io.File;
 import java.util.Date;
 import java.lang.Integer;
 import java.util.List;
+import java.util.Properties;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
@@ -36,6 +37,88 @@ public class Main {
     private static CommandLine cmdLine;
 
     private static String fileName;
+
+    private static void configureCommon(Properties properties) {
+        properties.setProperty("log4j.appender.stdout",
+                "org.apache.log4j.ConsoleAppender");
+
+        properties.setProperty("log4j.appender.stdout.Target",
+                "System.out");
+        properties.setProperty("log4j.appender.stdout.layout",
+                "org.apache.log4j.PatternLayout");
+        properties.setProperty(
+                "log4j.appender.stdout.layout.ConversionPattern",
+                "%C.%M:%L [%p] %m%n");
+        properties.setProperty("log4j.additivity.net.orpiske", "false");
+    }
+
+    private static void configureTrace(Properties properties) {
+        properties.setProperty("log4j.rootLogger", "DEBUG, stdout");
+        properties.setProperty("log4j.logger.net.orpiske", "TRACE, stdout");
+    }
+
+    private static void configureDebug(Properties properties) {
+        properties.setProperty("log4j.rootLogger", "INFO, stdout");
+        properties.setProperty("log4j.logger.net.orpiske", "DEBUG, stdout");
+    }
+
+    private static void configureVerbose(Properties properties) {
+        properties.setProperty("log4j.rootLogger", "WARN, stdout");
+        properties.setProperty("log4j.logger.net.orpiske", "INFO, stdout");
+    }
+
+    private static void configureSilent(Properties properties) {
+        properties.setProperty("log4j.rootLogger", "WARN, stdout");
+        properties.setProperty("log4j.logger.net.orpiske", "WARN, stdout");
+    }
+
+
+    public static void trace() {
+        Properties properties = new Properties();
+
+        configureCommon(properties);
+        configureTrace(properties);
+
+        PropertyConfigurator.configure(properties);
+    }
+
+
+    /**
+     * Configure the output to be at debug level
+     */
+    public static void debug() {
+        Properties properties = new Properties();
+
+        configureCommon(properties);
+        configureDebug(properties);
+
+        PropertyConfigurator.configure(properties);
+    }
+
+
+    /**
+     * Configure the output to be at verbose (info) level
+     */
+    public static void verbose() {
+        Properties properties = new Properties();
+
+        configureCommon(properties);
+        configureVerbose(properties);
+
+        PropertyConfigurator.configure(properties);
+    }
+
+    /**
+     * Configure the output to be as silent as possible
+     */
+    public static void silent() {
+        Properties properties = new Properties();
+
+        configureCommon(properties);
+        configureSilent(properties);
+
+        PropertyConfigurator.configure(properties);
+    }
 
     /**
      * Prints the help for the action and exit
@@ -56,6 +139,7 @@ public class Main {
 
         options.addOption("h", "help", false, "prints the help");
         options.addOption("f", "file", true, "file to plot");
+        options.addOption("l", "log-level", true, "optional log-level (one of trace, debug, info, silent [ default] )");
 
         try {
             cmdLine = parser.parse(options, args);
@@ -71,6 +155,32 @@ public class Main {
         if (fileName == null) {
             help(options, -1);
         }
+
+        String logLevel = cmdLine.getOptionValue('l');
+        if (logLevel == null) {
+            logLevel = "silent";
+        }
+
+        switch (logLevel) {
+            case "trace": {
+                trace();
+                break;
+            }
+            case "debug": {
+                debug();
+                break;
+            }
+            case "info": {
+                verbose();
+                break;
+            }
+            case "silent":
+            default: {
+                silent();
+                break;
+            }
+
+        }
     }
 
     public static void main(String[] args) {
@@ -82,8 +192,8 @@ public class Main {
 
             rateReader.read(fileName);
 
+            logger.info("Reading the rate records file");
             RateData<Integer> rateData = rateDataProcessor.getRateData();
-
 
             // Removes the gz
             String baseName = FilenameUtils.removeExtension(fileName);
@@ -103,8 +213,10 @@ public class Main {
                 }
             }
 
+            logger.info("Plotting the records");
             plotter.plot(ratePeriods, rateData.getRateValues());
 
+            logger.info("Writing the properties file");
             File input = new File(fileName);
             RatePropertyWriter.write(rateData, input.getParentFile());
 
