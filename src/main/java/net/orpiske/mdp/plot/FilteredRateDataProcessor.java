@@ -31,7 +31,7 @@ import java.util.Map;
 public class FilteredRateDataProcessor implements Processor {
     private static final Logger logger = LoggerFactory.getLogger(FilteredRateDataProcessor.class);
 
-    private Map<String, RateInfo<Integer>> cache = new HashMap<>();
+    private Map<String, RateInfo> cache = new HashMap<>();
     private SimpleDateFormat formatter;
     private long errorCount = 0;
     private long skipCount = 0;
@@ -50,13 +50,13 @@ public class FilteredRateDataProcessor implements Processor {
 
         try {
             String period = ata.substring(0, indexLen);
-            RateInfo<Integer> rateInfo = cache.get(period);
+            RateInfo rateInfo = cache.get(period);
 
             if (rateInfo == null) {
                 Date ataDate = formatter.parse(ata);
 
                 if (filter.eval(ataDate)) {
-                    rateInfo = new RateInfo<>(ataDate, 1);
+                    rateInfo = new RateInfo(ataDate, 1);
 
                     cache.put(period, rateInfo);
                 }
@@ -75,10 +75,10 @@ public class FilteredRateDataProcessor implements Processor {
         }
     }
 
-    public RateData<Integer> getRateData() {
-        RateData<Integer> rateData = new RateData<>();
+    public RateData getRateData() {
+        RateData rateData = new RateData();
 
-        for (RateInfo<Integer> rateInfo : cache.values()) {
+        for (RateInfo rateInfo : cache.values()) {
             rateData.add(rateInfo);
         }
 

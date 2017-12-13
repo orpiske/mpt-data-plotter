@@ -22,7 +22,7 @@ public class RatePropertyWriter {
      * @param directory the directory where the saved file will be located
      * @throws IOException if unable to save
      */
-    public static void write(final RateData<? extends Number> rateData, final File directory) throws IOException {
+    public static void write(final RateData rateData, final File directory) throws IOException {
         logger.trace("Writing properties to {}/rate.properties", directory.getPath());
 
         Properties prop = new Properties();
