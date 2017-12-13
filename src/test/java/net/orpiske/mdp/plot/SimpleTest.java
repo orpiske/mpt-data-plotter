@@ -13,7 +13,7 @@ import java.util.List;
 public class SimpleTest {
     public RateData<Integer> load(final String fileName) throws IOException {
         RateDataProcessor rateDataProcessor = new RateDataProcessor();
-        RateReader rateReader = new RateReader(rateDataProcessor);
+        DefaultRateReader rateReader = new DefaultRateReader(rateDataProcessor);
 
         rateReader.read(fileName);
 

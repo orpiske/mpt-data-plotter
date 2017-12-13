@@ -6,7 +6,6 @@ import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -19,7 +18,7 @@ public class FilteredTest {
     public RateData<Integer> load(final String fileName) throws IOException {
         DateFilter dateFilter = new DateFilter(new GregorianCalendar(2017, Calendar.JANUARY, 1).getTime());
         FilteredRateDataProcessor rateDataProcessor = new FilteredRateDataProcessor(dateFilter);
-        RateReader rateReader = new RateReader(rateDataProcessor);
+        DefaultRateReader rateReader = new DefaultRateReader(rateDataProcessor);
 
         rateReader.read(fileName);
 

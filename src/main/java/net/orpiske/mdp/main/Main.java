@@ -188,7 +188,7 @@ public class Main {
 
         try {
             RateDataProcessor rateDataProcessor = new RateDataProcessor();
-            RateReader rateReader = new RateReader(rateDataProcessor);
+            DefaultRateReader rateReader = new DefaultRateReader(rateDataProcessor);
 
             rateReader.read(fileName);
 
