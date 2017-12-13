@@ -28,6 +28,7 @@ import java.util.*;
 public class RateData<T extends Number> {
     private Set<RateInfo<T>> rateInfos = new TreeSet<>();
     private SummaryStatistics statistics;
+    private long errorCount;
 
     public void add(RateInfo<T> rateInfo) {
         rateInfos.add(rateInfo);
@@ -90,5 +91,13 @@ public class RateData<T extends Number> {
 
     public int getNumberOfSamples() {
         return rateInfos.size();
+    }
+
+    public long getErrorCount() {
+        return errorCount;
+    }
+
+    public void setErrorCount(long errorCount) {
+        this.errorCount = errorCount;
     }
 }

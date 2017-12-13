@@ -30,6 +30,7 @@ public class RateDataProcessor implements Processor {
 
     private Map<String, RateInfo<Integer>> cache = new HashMap<>();
     private SimpleDateFormat formatter;
+    private long errorCount = 0;
 
 
     public RateDataProcessor() {
@@ -56,7 +57,8 @@ public class RateDataProcessor implements Processor {
                 rateInfo.setCount(i);
             }
         } catch (ParseException e) {
-            e.printStackTrace();
+            logger.warn("Error parsing record with values {},{}: {}", eta, ata, e.getMessage());
+            errorCount++;
         }
     }
 
@@ -66,6 +68,8 @@ public class RateDataProcessor implements Processor {
         for (RateInfo<Integer> rateInfo : cache.values()) {
             rateData.add(rateInfo);
         }
+
+        rateData.setErrorCount(errorCount);
         return rateData;
     }
 }

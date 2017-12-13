@@ -94,7 +94,8 @@ public class Main {
             RatePlotter plotter = new RatePlotter(baseName);
 
             List<Date> ratePeriods = rateData.getRatePeriods();
-            logger.info("Number of rate records to plot: {} ", ratePeriods.size());
+            logger.info("Number of rate records to plot: {}", ratePeriods.size());
+            logger.info("Number of rate records in error: {}", rateData.getErrorCount());
 
             if (logger.isDebugEnabled()) {
                 for (Date d : ratePeriods) {
