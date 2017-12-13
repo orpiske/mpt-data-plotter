@@ -32,6 +32,10 @@ public class SimpleTest {
         plotter.plot(rateData.getRatePeriods(), rateData.getRateValues());
     }
 
+    /**
+     * Test parsing receiver rates
+     * @throws Exception
+     */
     @Test
     public void testPlotReceiverRate() throws Exception {
         String fileName = this.getClass().getResource("receiverd-rate-01.csv.gz").getPath();
@@ -49,6 +53,11 @@ public class SimpleTest {
         assertTrue("Missing output file: " + outputFile, outputFile.exists());
     }
 
+
+    /**
+     * Test parsing sender rates
+     * @throws Exception
+     */
     @Test
     public void testPlotSenderRate() throws Exception {
         String fileName = this.getClass().getResource("senderd-rate-01.csv.gz").getPath();
@@ -73,6 +82,10 @@ public class SimpleTest {
     }
 
 
+    /**
+     * Tests parsing out-of-order records
+     * @throws Exception
+     */
     @Test
     public void testPlotOutOrderRate() throws Exception {
         String fileName = this.getClass().getResource("out-of-order-01.csv.gz").getPath();
@@ -97,6 +110,34 @@ public class SimpleTest {
 
         File outputFile = new File(ratePngFilename);
         assertTrue("Missing output file: " + outputFile, outputFile.exists());
+    }
+
+
+    /**
+     * Test parsing the rates from the C code
+     * @throws Exception
+     */
+    @Test
+    public void testPlotSenderRateFromC() throws Exception {
+        String fileName = this.getClass().getResource("senderd-rate-valid-c.csv.gz").getPath();
+
+        RateData<Integer> rateData = load(fileName);
+
+        assertTrue("Incorrect loaded size for the rate periods", 8 == rateData.getRatePeriods().size());
+        assertTrue("Incorrect loaded size for the rate values", 8 == rateData.getRateValues().size());
+
+        plot(fileName, rateData);
+
+        String ratePngFilename = FilenameUtils.removeExtension(FilenameUtils.removeExtension(fileName)) + "_rate.png";
+
+        File outputFile = new File(ratePngFilename);
+        assertTrue("Missing output file: " + outputFile, outputFile.exists());
+
+        File input = new File(fileName);
+        RatePropertyWriter.write(rateData, input.getParentFile());
+
+        File propertiesFile = new File(input.getParentFile(), "rate.properties");
+        assertTrue("Missing properties output file: " + propertiesFile, propertiesFile.exists());
     }
 
 }
