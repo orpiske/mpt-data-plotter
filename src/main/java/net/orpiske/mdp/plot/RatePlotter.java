@@ -33,12 +33,13 @@ import java.util.List;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class RatePlotter {
-    private static final String SERIES_NAME = "Throughput rate";
     private String baseName;
 
     private int outputWidth = 1200;
     private int outputHeight = 700;
     private boolean plotGridLinesVisible = true;
+
+    private ChartProperties chartProperties = new ChartProperties();
 
     public RatePlotter(final String baseName) {
         this.baseName = baseName;
@@ -50,9 +51,9 @@ public class RatePlotter {
         XYChart chart = new XYChartBuilder()
                 .width(outputWidth)
                 .height(outputHeight)
-                .title("Throughput rate")
-                .xAxisTitle("Time")
-                .yAxisTitle("Rate")
+                .title(chartProperties.getTitle())
+                .xAxisTitle(chartProperties.getxTitle())
+                .yAxisTitle(chartProperties.getyTitle())
                 .build();
 
         chart.getStyler().setPlotBackgroundColor(ChartColor.getAWTColor(ChartColor.WHITE));
@@ -86,7 +87,7 @@ public class RatePlotter {
         XYChart chart = buildCommonChart();
 
         // Series
-        XYSeries series = chart.addSeries(SERIES_NAME, xData, yData);
+        XYSeries series = chart.addSeries(chartProperties.getSeriesName(), xData, yData);
 
         series.setLineColor(XChartSeriesColors.BLUE);
         series.setMarkerColor(Color.LIGHT_GRAY);
@@ -120,4 +121,13 @@ public class RatePlotter {
     public void setPlotGridLinesVisible(boolean plotGridLinesVisible) {
         this.plotGridLinesVisible = plotGridLinesVisible;
     }
+
+    public ChartProperties getChartProperties() {
+        return chartProperties;
+    }
+
+    public void setChartProperties(ChartProperties chartProperties) {
+        this.chartProperties = chartProperties;
+    }
+
 }
