@@ -24,8 +24,8 @@ public interface Processor {
 
     /**
      * Process a CSV record
-     * @param eta
-     * @param ata
+     * @param eta estimated time to arrive
+     * @param ata actual time to arrive
      */
     void process(final String eta, final String ata);
 }

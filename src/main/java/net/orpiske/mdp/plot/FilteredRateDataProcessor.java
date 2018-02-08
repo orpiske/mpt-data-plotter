@@ -38,7 +38,7 @@ public class FilteredRateDataProcessor implements Processor {
     private Filter<Date> filter;
 
 
-    public FilteredRateDataProcessor(Filter filter) {
+    public FilteredRateDataProcessor(Filter<Date> filter) {
         // 2017-08-05 10:38:23.934129
         formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 

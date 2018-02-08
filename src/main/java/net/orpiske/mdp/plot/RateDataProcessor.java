@@ -67,9 +67,7 @@ public class RateDataProcessor implements Processor {
     public RateData getRateData() {
         RateData rateData = new RateData();
 
-        cache.forEach((ratePeriod,rateInfo)->{
-            rateData.add(rateInfo);
-        });
+        cache.forEach((ratePeriod,rateInfo)-> rateData.add(rateInfo));
 
         rateData.setErrorCount(errorCount);
         return rateData;

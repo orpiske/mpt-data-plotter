@@ -55,7 +55,6 @@ public final class FastRateReader implements RateReader {
                 return;
             }
 
-            long samples = 0;
             String line;
             while ((line = stream.readLine()) != null) {
                 final int separatorIndex = line.indexOf(SEPARATOR);
@@ -65,9 +64,6 @@ public final class FastRateReader implements RateReader {
                 final String end = line.substring(separatorIndex + 2, line.length() - 1);
 
                 processor.process(start, end);
-
-                samples++;
-
             }
         }
     }

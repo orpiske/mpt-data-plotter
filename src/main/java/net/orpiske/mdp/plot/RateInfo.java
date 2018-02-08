@@ -10,7 +10,7 @@ class RateInfo implements Comparable<RateInfo>
     private Date period;
     private int count;
 
-    public RateInfo(Date period, int count)
+    public RateInfo(final Date period, int count)
     {
         this.period = period;
         this.count = count;
@@ -32,13 +32,13 @@ class RateInfo implements Comparable<RateInfo>
     }
 
     @Override
-    public int compareTo(RateInfo rateInfo)
+    public int compareTo(final RateInfo rateInfo)
     {
         return this.getPeriod().compareTo(rateInfo.getPeriod());
     }
 
     @Override
-    public boolean equals(Object o)
+    public boolean equals(final Object o)
     {
         if (this == o)
         {
@@ -59,4 +59,4 @@ class RateInfo implements Comparable<RateInfo>
     {
         return period.hashCode();
     }
-};
+}

@@ -47,7 +47,6 @@ public class DefaultRateReader implements RateReader {
         InputStream fileStream = null;
         InputStream gzipStream = null;
         Reader in = null;
-        long count = 0;
 
         logger.debug("Reading file {}", filename);
 
