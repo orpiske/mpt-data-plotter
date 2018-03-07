@@ -20,7 +20,7 @@
 
     <groupId>net.orpiske</groupId>
     <artifactId>mpt-data-plotter</artifactId>
-    <version>1.1.4-SNAPSHOT</version>
+    <version>1.2.0-SNAPSHOT</version>
 
     <scm>
         <developerConnection>scm:git:git@github.com:orpiske/mpt-data-plotter.git</developerConnection>
