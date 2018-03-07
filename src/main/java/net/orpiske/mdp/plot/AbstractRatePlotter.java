@@ -86,6 +86,10 @@ public abstract class AbstractRatePlotter {
     }
 
 
+    /**
+     * Build a default chart
+     * @return
+     */
     protected XYChart buildCommonChart() {
 
         // Create Chart
@@ -126,5 +130,12 @@ public abstract class AbstractRatePlotter {
         return chart;
     }
 
+    /**
+     * Plots the data
+     * @param xData
+     * @param yData
+     * @throws IOException
+     * @throws MptEmptyDataSet
+     */
     abstract public void plot(final java.util.List<Date> xData, final List<? extends Number> yData) throws IOException, MptEmptyDataSet;
 }

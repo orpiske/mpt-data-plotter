@@ -65,6 +65,4 @@ public class RatePlotter extends AbstractRatePlotter {
 
         plotAll(xData, yData);
     }
-
-
 }
