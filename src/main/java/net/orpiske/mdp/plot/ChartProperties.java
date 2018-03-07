@@ -1,10 +1,10 @@
 package net.orpiske.mdp.plot;
 
 public class ChartProperties {
-    private String title = "Throughput rate";
+    private String title = "Rate distribution over time";
     private String seriesName = "Throughput rate";
     private String xTitle = "";
-    private String yTitle = "Rate";
+    private String yTitle = "Messages p/ second";
 
     public String getTitle() {
         return title;
