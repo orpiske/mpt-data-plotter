@@ -110,8 +110,6 @@ public abstract class AbstractRatePlotter {
         chart.getStyler().setBaseFont(font);
         chart.getStyler().setPlotGridLinesVisible(plotGridLinesVisible);
 
-        chart.getStyler().setYAxisTickMarkSpacingHint(15);
-
         chart.getStyler().setXAxisLabelRotation(45);
 
         chart.getStyler().setAxisTickMarkLength(15);
