@@ -22,6 +22,10 @@
     <artifactId>mpt-data-plotter</artifactId>
     <version>1.2.2-SNAPSHOT</version>
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
     <scm>
         <developerConnection>scm:git:git@github.com:orpiske/mpt-data-plotter.git</developerConnection>
         <url>https://github.com/orpiske/mpt-data-plotter</url>
