@@ -16,9 +16,9 @@ Building
 
 **Build Reports**
 
-Build Status: [![Build Status](https://travis-ci.org/orpiske/quiver-data-plotter.svg?branch=master)](https://travis-ci.org/orpiske/quiver-data-plotter)
+Build Status: [![Build Status](https://travis-ci.org/orpiske/mpt-data-plotter.svg?branch=master)](https://travis-ci.org/orpiske/mpt-data-plotter)
 
-Codacy Report: [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b09e4a11c0494f4c86da8d99d89bc3bc)](https://www.codacy.com/app/orpiske/quiver-data-plotter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=orpiske/quiver-data-plotter&amp;utm_campaign=Badge_Grade)
+Codacy Report: [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b88b80002b34448a932ed2a5fc67ef48)](https://www.codacy.com/app/orpiske/mpt-data-plotter?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=orpiske/mpt-data-plotter&amp;utm_campaign=Badge_Grade)
 
 **Build Steps**
 
